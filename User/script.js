@@ -1,15 +1,14 @@
 const signUp = e => {
-    let firstname = document.getElementById('fname').value,
-        lastname = document.getElementById('lname').value,
-        email = document.getElementById('email').value,
-        password = document.getElementById('pwrd').value;
+    let firstname = document.getElementById('fname').value;
+    let lastname = document.getElementById('lname').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('pwrd').value;
 
     let userData = JSON.parse(localStorage.getItem('userData')) || [];
 
     let exist = userData.length && 
         JSON.parse(localStorage.getItem('userData')).some(data => 
-            data.firstname.toLowerCase() == firstname.toLowerCase() && 
-            data.lastname.toLowerCase() == lastname.toLowerCase()
+            data.email.toLowerCase() == email.toLowerCase()
         );
 
     if(!exist){
