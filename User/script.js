@@ -35,7 +35,7 @@ function signIn(e) {
         alert("Incorrect login details");
     }
     else{
-        window.location.href = "home.html";
+        window.location.href = "userpage.html";
     }
     e.preventDefault();
 }
