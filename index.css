@@ -16,6 +16,12 @@ header p{
 main{
     padding-top: 50px;
 }
+#recentpost{
+    padding-bottom: 50px;
+}
+main h1{
+    font-size: 40px;
+}
 @media (max-width:600px) {
     header h1{
     font-size: 60px;
@@ -25,5 +31,11 @@ main{
         font-size: 18px;
         font-weight: 500;
         padding-right: 60px;
+    }
+    #recentpost{
+        padding-bottom: 30px;
+    }
+    main h1{
+        font-size: 30px;
     }
 }
