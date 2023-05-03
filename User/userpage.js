@@ -23,17 +23,7 @@ const storedObject = JSON.parse(storedObjectString);
             displayNote(); 
 
         }
-        function getExistingRecentNotes(){
-            let localNote = localStorage.getItem("notes");
-            if(localNote){
-                noteArr = JSON.parse(localNote);
-            }else{
-                noteArr = [];
-            }
-            
-            displayRecentNote(); 
-
-        }
+        
 
         function addNote(){
             if(isEditing){
@@ -48,6 +38,7 @@ const storedObject = JSON.parse(storedObjectString);
                 
                 updateLocalStorage();
                 displayNote();
+                displayRecentNote();
             }else{
                 let Title = document.getElementById('titleInput').value;
                 let Note = document.getElementById('noteContentInput').value;
@@ -59,6 +50,7 @@ const storedObject = JSON.parse(storedObjectString);
             
                 updateLocalStorage();
                 displayNote();
+                displayRecentNote();
                 
             }
             
@@ -95,25 +87,7 @@ const storedObject = JSON.parse(storedObjectString);
             isEditing = false;
         }
 
-        // function displayRecentNote(){
-        //     let recentPosts = JSON.parse(localStorage.getItem('notes'));
-        //     if (!recentPosts){
-        //         recentPosts = [];
-        //     }
-        //     let recentContainer = document.getElementById('showRecentBox');
-
-        // for (let i = 0; i < 4; i++){
-        //     let post = document.createElement('div');
-        //     post.classList.add('post');
-        //     post.innerHTML = `<h2>${recentPosts[i].title}</h2>
-        //     <p>${recentPosts[i].note}</p>`;
-
-        //     recentContainer.appendChild(post);
-        // }
-        //     document.getElementById('showRecentBox').innerHTML = recentPosts;
-        // }
-
-
+       
         function deleteNote(i){
             if(confirm ("Click OK to delete note!!!")) {
                 noteArr.splice(i,1);
