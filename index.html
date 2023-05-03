@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 </head>
 
+
 <body  onload="getExistingRecentNotes()">
     <!-- NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
@@ -50,18 +51,22 @@
         </div>
         </div>
     </nav>
+
+
 <!-- HEADER -->
     <header class="mb-5">
         <div class="container">
             <div class="row">
                 <div align="center" class="col">
-                    <h1 class="text-white fw-bold">Stay Organized and Productive</h1>
+                    <h1 id="head-text" class="text-white fw-bold"></h1>
                     <p class="text-white"> Keep All Your Important Notes on NoteCorner</p>
                     <a id="start-readingBtn" class="btn btn-lg mt-5" href="User/signin.html">Start reading</a>
                 </div>
             </div>   
         </div>
     </header>
+
+
     <!-- MAIN -->
     <main>
         <div>
@@ -70,10 +75,9 @@
                 <h1 class="fw-bold text-center">RECENT POSTS</h1>
                 <div id="recent">
                     <div class="box" id="showRecentBox"> </div>
-
                 </div>
             </div>
-
+            <!-- CONTACT SESSION for mobile view-->
             <div id="contact">
                 <div style="padding-bottom: 50px;" class="container d-md-none">
                     <h1 align="center" class="pt-5 text-white fw-bold">GET IN TOUCH</h1>
@@ -86,12 +90,12 @@
                         <textarea class="form-control" placeholder="Message" name="message" id="message" cols="30" rows="3"></textarea>
                     
                         <button onclick="submitMessage()" id="send-btn" class="btn form-control mt-5 mb-5 fw-semibold" type="submit">Send</button>
-                        
-                 
                 </form>
                 </div>
             </div>
 
+
+            <!-- CONTACT SESSION  for desktop view -->
             <div  class="container d-none d-md-block">
                 <div id="contact-container" class="row bg-white shadow-lg">
                     <h1 style="text-align: center;">GET IN TOUCH</h1>
@@ -100,9 +104,9 @@
                             <p> <i class="bi bi-geo-alt-fill me-3"></i>N0 15 Surulere Close, Ojoo, Ibadan.</p>
                             <a class="text-decoration-none text-black" href="tel:+2347067144956"> <i class="bi bi-telephone-plus me-3"></i> +234 7067144956</a> <br>
                             <a class="text-decoration-none text-black" href="mailto:ajalapeter1@gmail.com"> <i class="bi bi-envelope me-3"></i> ajalapeter1@gmail.com</a>
-        
                         </div>
                     </div>
+
                     <div id="con-message" class="col-12 col-md-6">
                         <p style="font-weight: bold;">Leave us a message</p>
                     <form id="login-form" class="form-control py-3 mb-5" role="form">
@@ -113,14 +117,14 @@
                         <textarea class="form-control" name="message" id="message" placeholder="Message" cols="30" rows="5"></textarea>
                     
                         <button onclick="submitMessage()" id="send-btn" class="btn form-control mt-5 fw-semibold" type="submit">Send</button>
-                </form>
-        
+                    </form>
                     </div>
                 </div>
             </div>
-           
     </main>
 
+
+    <!-- FOOTER  -->
     <footer>
         <div class="container">
             <div class="row">
@@ -143,14 +147,19 @@
         <div align="center" class="text-white mt-4 pb-5"><i class="bi bi-c-circle text-white me-1"></i>timexdev 2023</div>
     </footer>
 
+
+    <!-- SCRIPT -->
     <script>
-        const signin1 = () => {
+    // function for sign in and sign up buttons
+    const signin1 = () => {
     window.location.href = "User/signin.html"
     }
     const signup1 = () => {
     window.location.href = "User/signup.html"
     }
 
+
+    // Function to get existing recent notes from the local storage
     function getExistingRecentNotes(){
             let localNote = localStorage.getItem("notes");
             if(localNote){
@@ -158,66 +167,57 @@
             }else{
                 noteArr = [];
             }
-            
             displayRecentNote(); 
-
         }
 
-    // function recentPost(){
-    //     document.getElementById('recentpost').innerHTML = localStorage.getItem('notes')
-    // }
 
-     // Get the modal
-var modal = document.getElementById("about-modal");
+        // Function to display autotyped header text
+        const wordToType = "Stay Organized and Productive"
+        const typedText = document.getElementById("head-text");
 
-// Get the button that opens the modal
-var btn = document.getElementById("open-modal");
+        function typeText(index) {
+            if (index < wordToType.length) {
+                 setTimeout(function(){
+            typedText.textContent += wordToType [index];
+             typeText(index + 1)
+            },100
+            )}
+        }
+             typeText(0)
+   
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+        // function for the about page modal display
+        var modal = document.getElementById("about-modal");
+        var btn = document.getElementById("open-modal");
+        var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                }
+            }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+        // Function to submit Message sent by user/client
+        var messageArray = [];
 
-var messageArray = [];
-
-function submitMessage(){
-    let Name = document.getElementById('name').value;
-    let Email = document.getElementById('email').value;
-    let Message = document.getElementById('message').value;
-    let mesObj = {name:Name, email:Email, message:Message, date: new Date().toUTCString()};
+        function submitMessage(){
+            let Name = document.getElementById('name').value;
+            let Email = document.getElementById('email').value;
+            let Message = document.getElementById('message').value;
+            let mesObj = {name:Name, email:Email, message:Message, date: new Date().toUTCString()};
     
-    messageArray.unshift(mesObj);
-    localStorage.setItem ("message", JSON.stringify(messageArray));
-}
-
-// // FUNCTION TO UPLOAD RECENT CONTENTS
-// let i;
-//             for ( i = 0; i <= 3; i++){
-//                 const storedString = localStorage.getItem('notes',);
-
-// // Convert the string back to an object
-
-
-//                 document.getElementById('recent').innerHTML = storedString.note;
-//             }
-
-
+            messageArray.unshift(mesObj);
+            localStorage.setItem ("message", JSON.stringify(messageArray));
+        }
     </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="User/registration.js"></script>
     <script src="User/userpage.js"></script>
