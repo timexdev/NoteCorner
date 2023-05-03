@@ -9,6 +9,8 @@
     var noteArr = [];
     var isEditing = false;
     var editingIndex;
+    var likeIndex;
+    var speakingIndex;
 
     
     // FUNCTION TO GET EXISTING NOTES FROM LOCAL STORGAE
@@ -63,7 +65,7 @@
         let i;
         for ( i = 0; i < noteArr.length; i++) {
                 
-            content +=`<div style="border-bottom:1px solid black;"> <p class="fw-semibold mt-3 fs-4">${noteArr[i].title}</p> <p class="text-primary">${noteArr[i].date}</p> <p>${noteArr[i].note}</p> <button class="mb-3 me-2 border-0 bg-danger text-white rounded-1 px-3 py-1" onclick="deleteNote(${i})">Delete</button> <button class="mb-3 border-0 bg-success text-white rounded-1 px-3 py-1" onclick="editNote(${i})">Edit</button></div>`;
+            content +=`<div style="border-bottom:1px solid black;"> <p class="fw-semibold mt-3 fs-4">${noteArr[i].title}</p> <p class="text-primary">${noteArr[i].date}</p> <p>${noteArr[i].note}</p> <button class="mb-3 me-2 border-0 bg-danger text-white rounded-1 px-3 py-1" onclick="deleteNote(${i})">Delete</button> <button class="mb-3 border-0 bg-success text-white rounded-1 px-3 py-1" onclick="editNote(${i})">Edit</button> <button onclick="likeBtn(${i})">Like</button> <span id="like-count">0</span> Likes <button onclick="speakBtn">Speak</button></div>`;
         }
 
             document.getElementById('showBox').innerHTML = content;
@@ -114,5 +116,38 @@
             isEditing = true;
             }
         }
+    
+        // FUNCTION TO INCREASE NUMBER OF LIKES
+        let likes = 0;
+    function likeBtn(i){
+        likeIndex = i;
+        likes++
+        updateLocalStorage();
+        displayNote();
         
+        document.getElementById('like-count').innerHTML = likes;
+    }
+        
+
+    // // FUNCTION FOR SPEECH
+    // function speakBtn(i){
+    //     speakingIndex = i;
+    //     if('speechSynthesis' in window){
+    //         var message = new SpeechSynthesisUtterance();
+    //         var voices = speechSynthesis.getVoices();
+    
+    
+    //         message.text = document.getElementById('noteContentInput').value;
+    //         message.voice = voices[2];
+    //         message.volume = 1;
+    //         message.rate = 1;
+    //         message.pitch = 2;
+    //         message.lang = "en-US";
+    //         window.speechSynthesis.speak(message);
+    //     }else{
+    //         alert("Your Browser does not support speech synthesis !!!")
+    //     }
+        
+    
+    // }
        
