@@ -9,7 +9,7 @@ const getExistingUsers = () => {
     }else{
         userArr = [];
     }
-
+    signUp();
 }
 
 const CurrentUser = localStorage.getItem('CurrentUser');
