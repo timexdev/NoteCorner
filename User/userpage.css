@@ -34,7 +34,7 @@
         overflow-wrap: break-word;    
     }
     #profile{
-        position:fixed;
+        position:absolute;
         top:0;
         z-index: 1000;
         background-color: rgb(68, 68, 68);

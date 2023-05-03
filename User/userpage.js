@@ -107,6 +107,10 @@
             noteContentInput.value = note.note;
 
             document.getElementById('addNoteBtn').innerHTML = 'Update Note'
+            window.scrollTo({
+                top:0,
+                behavior: "smooth"
+            });
             isEditing = true;
             }
         }
